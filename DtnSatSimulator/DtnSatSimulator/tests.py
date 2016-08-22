@@ -30,11 +30,27 @@ class Test(unittest.TestCase):
         
         #keplerian parameters: {a: 7069220.386682823; e: 4.777356060557311E-4; i: 98.18525099174988; pa: 13.741061002484528; raan: 150.34825333049; v: -13.952151446378437;}
     
-        sat = Satellite.create(0.01, 700, 98, 150.348, 13.74, 0.0)
+    
+        """
+        Estacion espacial internacional
+        Eccentricity:    0.0001506
+        inclination:    51.6427°
+        perigee height:    401 km
+        apogee height:    403 km
+        right ascension of ascending node:    85.0350°
+        argument of perigee:    162.0483°
+        revolutions per day:    15.55092441
+        mean anomaly at epoch:    198.0723°
+        orbit number at epoch:    1536
+        """
+        #ephem.degrees()
+        sat = Satellite.create(0.0001506, 700, ephem.degrees(98.64), ephem.degrees(85.0), ephem.degrees(162.0), ephem.degrees(198.0723))
+        
+        #sat = Satellite.create(0.01, 700, 98, 150.348, 13.74, 0.0)
         
         dt = ephem.now()
-        for i in range(8):
-            dt += ephem.minute * 5.
+        for i in range(90):
+            dt += ephem.minute * 1.0
             val = sat.getPosition(dt)
             print(val)
             #sep = ephem.separation((old_az, old_alt), (sun.az, sun.alt))
