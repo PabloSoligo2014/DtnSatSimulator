@@ -6,6 +6,7 @@ Created on 19 de ago. de 2016
 from django.db import models
 from datetime import datetime
 import ephem
+from DtnSatSimulator.Utils.MathUtils import AttitudeToPeriod
 
 
 class Orbit(models.Model):
@@ -21,11 +22,11 @@ class Orbit(models.Model):
     meanAnomaly             = models.FloatField()
     pyEpoch                 = models.DateTimeField()
     
-    _orekitOrbit = None 
-    _propagator  = None
+    #_orekitOrbit = None 
+    #_propagator  = None
+    epSat = None
        
     
-    #keplerian parameters: {a: 7069220.386682823; e: 4.777356060557311E-4; i: 98.18525099174988; pa: 13.741061002484528; raan: 150.34825333049; v: -13.952151446378437;}
     @classmethod
     def create(cls, eccentricity, semimajorAxis, inclination, longitudeAscendingNode, argumentPeriapsis, meanAnomaly):        
         result = cls()
@@ -35,44 +36,43 @@ class Orbit(models.Model):
         result.longitudeAscendingNode   = longitudeAscendingNode
         result.argumentPeriapsis        = argumentPeriapsis
         result.meanAnomaly              = meanAnomaly
-        result.pyEpoch                  = datetime.utcnow()
+        result.pyEpoch                  = ephem.now()
         
         
+        """        
+        _epoch � Reference epoch
+        _n � Mean motion, in revolutions per day
+        _inc � Inclination (�)
+        _raan � Right Ascension of ascending node (�)
+        _e � Eccentricity
+        _ap � Argument of perigee at epoch (�)
+        _M � Mean anomaly from perigee at epoch (�)
         
-        
-        #setup_orekit_curdir()
- 
-        #
-        #adate = datetime_to_absolutedate(datetime.utcnow()) 
-        #print adate
-        #dt = absolutedate_to_datetime(adate)
-        #print "Datetime ", dt
-        
-        #inertialFrame = FramesFactory.getEME2000()
-        #self.orekitOrbit    = KeplerianOrbit(result.semimajorAxis, 
-        #                                     result.eccentricity, 
-        #                                     result.inclination, 
-        #                                     result.argumentPeriapsis, 
-        #                                     result.longitudeAscendingNode, 
-        #                                     result.meanAnomaly, 
-        #                                     inertialFrame, 
-        #                                     datetime_to_absolutedate(datetime.utcnow()), 
-        #                                     Constants.WGS84_EARTH_MU);
-        #self.propagator     = KeplerianPropagator(self.orekitOrbit);
-    
-        
+        _decay � Orbit decay rate in revolutions per day, per day
+        _drag � Object drag coefficient in per earth radii
+        _orbit � Integer orbit number of epoch
         """
-        Frame inertialFrame = FramesFactory.getGCRF();
-        self.orekitOrbit = new KeplerianOrbit(a, e, i, omega, raan, lM, PositionAngle.MEAN,inertialFrame, initialDate, mu);
+        result.epSat        = ephem.EarthSatellite()
+        result.epSat._n     = AttitudeToPeriod((ephem.earth_radius/1000)+semimajorAxis) #� Mean motion, in revolutions per day
+        result.epSat._inc   = inclination#46.8
+        result.epSat._e     = result.eccentricity#1.4538821258014423e-09
+        result.epSat._ap    = argumentPeriapsis  #  0.0
+        result.epSat._raan  = longitudeAscendingNode
+        result.epSat._M     = meanAnomaly
+        result.epSat._epoch = result.pyEpoch # '2014/02/14 13:00:00'
         
-        self.propagator = new KeplerianPropagator(this.orekitOrbit);
+        result._decay       = 0#— Orbit decay rate in revolutions per day, per day
+        result._drag        = 0#— Object drag coefficient in per earth radii
+        result._orbit       = 0#— Integer orbit number of epoch
+
         
-        self.propagator.setSlaveMode();            
-        """
+        #sma = 6878.13631
+        
         return result
         
-    def getPosition(self):
-        pass
+    def getPosition(self, dt):
+        return self.epSat.compute(epoch=dt)
+        
     
     def __str__(self):
         return "orbit!"

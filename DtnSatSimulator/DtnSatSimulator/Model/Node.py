@@ -10,8 +10,8 @@ class Node(models.Model):
     '''
     classdocs
     '''
-    code = models.CharField("Nodo", max_length=30, "Nodo", blank=True)
-    description = models.CharField("Descripcion", max_length=120, "Descripcion", blank=True)
+    code = models.CharField('Codigo del satelite', max_length=24, help_text='Codigo del satelite, ejemplo FS2017', unique=True)
+    description = models.CharField("Descripcion", max_length=120, help_text="Descripcion", blank=True)
     
     
     def __str__(self):
