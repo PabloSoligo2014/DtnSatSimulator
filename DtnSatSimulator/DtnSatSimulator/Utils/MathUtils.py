@@ -10,23 +10,30 @@ import DtnSatSimulator.Utils.Constants
 #G = 6.67300e-11 # m3 kg-1 s-2
     
     
+#cgs centrimetros, gramos, segundos
+    
 def PeriodToSemiaxis(Period):
-    a = (Period**2*(DtnSatSimulator.Utils.Constants.G*DtnSatSimulator.Utils.Constants.Me)/4*math.pi**2)**(1/3.0)
+    GM = DtnSatSimulator.Utils.Constants.G*DtnSatSimulator.Utils.Constants.Me
+    a = (Period**2*(GM)/4*math.pi**2)**(1/3.0)
     return a
 
-def SemiaxisToPeriod(Semiaxis):
+def AttitudeToPeriod(Semiaxis):
     #Calculate the orbital period and the speed of a satellite in oribt around
     #a massive object of mass M at a distance r from the centre of mass M.
     #pi
     #gravitational constant in mks units
     #get r
     
-    T= math.sqrt( ((4*math.pi**2)*Semiaxis**3/(DtnSatSimulator.Utils.Constants.G*DtnSatSimulator.Utils.Constants.Me) ) )
+    #Si semiaxis esta en kilometros lo tengo que pasar a centrimetros
+    Semiaxis = Semiaxis * 1000 * 100
+    
+    GM = DtnSatSimulator.Utils.Constants.G*DtnSatSimulator.Utils.Constants.Me
+    T= math.sqrt( ((4*math.pi**2)*Semiaxis**3/(GM) ) )/60.0 #[minutos]
     
     #The period in years is T divided by the number of seconds in a year.
-    T_years = T/(365.0*24.0*60.0*60.0)
+    TF = (24*60)/T
     #The speed for a circular orbit of radius r
     
-    return T_years
+    return TF
     
     
