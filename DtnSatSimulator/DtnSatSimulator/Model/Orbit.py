@@ -71,6 +71,7 @@ class Orbit(models.Model):
         return result
         
     def getPosition(self, dt):
+        print("Fecha para compute", ephem.date( dt ))
         return self.epSat.compute(epoch=dt)
         
     
