@@ -3,7 +3,7 @@ Created on 19 de ago. de 2016
 
 @author: pabli
 '''
-from DtnSatSimulator.Model.Node import Node 
+from DtnSatSimulator.models.Node import Node 
 from django.db import models
 
 class GroundStation(Node):

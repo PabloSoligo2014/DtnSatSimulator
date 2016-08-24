@@ -6,7 +6,7 @@ Created on 22 de ago. de 2016
 
 
 from django.db import models
-from DtnSatSimulator.Model import Node
+from DtnSatSimulator.models.Node import Node
 
 class Message(models.Model):
     

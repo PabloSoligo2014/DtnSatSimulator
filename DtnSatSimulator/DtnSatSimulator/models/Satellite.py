@@ -8,8 +8,8 @@ from django.db import models
 from datetime import *
 import ephem
 
-from DtnSatSimulator.Model.Node import Node
-from DtnSatSimulator.Model.Orbit import Orbit
+from DtnSatSimulator.models.Node import Node
+from DtnSatSimulator.models.Orbit import Orbit
 
 
 class Satellite(Node):
