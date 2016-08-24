@@ -79,5 +79,5 @@ class Orbit(models.Model):
         
     
     def __str__(self):
-        return "orbit!"
+        return "Orbita, excentricidad: "+str(self.eccentricity)+", etc"
 

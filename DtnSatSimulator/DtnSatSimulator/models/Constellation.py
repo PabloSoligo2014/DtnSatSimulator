@@ -16,4 +16,4 @@ class Constellation(models.Model):
     #nodes = models.ManyToManyField(Node, 'constellations')
 
     def __str__(self):
-        return None
+        return self.name

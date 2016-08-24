@@ -33,7 +33,7 @@ class Satellite(Node):
 
 
     def __str__(self):
-        return None
+        return self.code
     
     def getPosition(self, dt):
         
