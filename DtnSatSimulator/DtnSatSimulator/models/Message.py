@@ -10,8 +10,8 @@ from DtnSatSimulator.models.Node import Node
 
 class Message(models.Model):
     
-    origin      = models.ForeignKey(Node)
-    destination = models.ForeignKey(Node)
+    source      = models.ForeignKey(Node, related_name='sourceMessages')
+    destination = models.ForeignKey(Node, related_name='destinationMessages')
     
     
     

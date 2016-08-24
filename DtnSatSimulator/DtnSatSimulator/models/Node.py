@@ -16,7 +16,7 @@ class Node(models.Model):
     code = models.CharField('Codigo del satelite', max_length=24, help_text='Codigo del satelite, ejemplo FS2017', unique=True)
     description = models.CharField("Descripcion", max_length=120, help_text="Descripcion", blank=True)
     #, through='NodeConstellation'
-    constellations = models.ManyToManyField(Constellation, blank=True, null=True, related_name="nodes")
+    constellations = models.ManyToManyField(Constellation, blank=True, related_name="nodes")
 
     
     def __str__(self):
