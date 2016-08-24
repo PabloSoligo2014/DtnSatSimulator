@@ -15,6 +15,13 @@ class Message(models.Model):
     
     
     
+    def getActiveTrack(self):
+        #El ultimo track es el activo
+        #return self.tracks[0]
+        return None
+    
+    
+    
     
 
         
