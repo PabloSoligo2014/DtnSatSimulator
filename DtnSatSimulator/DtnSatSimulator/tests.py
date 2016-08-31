@@ -7,7 +7,7 @@ import unittest
 
 from DtnSatSimulator.Utils.MathUtils import AttitudeToPeriod
 import ephem
-from DtnSatSimulator.Model.Satellite import Satellite
+from DtnSatSimulator.models.Satellite import Satellite
 from datetime import *
 
 class Test(unittest.TestCase):
@@ -44,7 +44,8 @@ class Test(unittest.TestCase):
         orbit number at epoch:    1536
         """
         #ephem.degrees()
-        sat = Satellite.create(0.0001506, 700, ephem.degrees(98.64), ephem.degrees(85.0), ephem.degrees(162.0), ephem.degrees(198.0723))
+        sat = Satellite()
+        
         
         #sat = Satellite.create(0.01, 700, 98, 150.348, 13.74, 0.0)
         
