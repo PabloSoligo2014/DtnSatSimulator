@@ -5,8 +5,8 @@ Created on Aug 29, 2016
 '''
 
 from django.db import models
-from GroundSegment.models.Satellite import Satellite
-from GroundSegment.models.Tle import Tle
+from DtnSatSimulator.models.Satellite import Satellite
+from DtnSatSimulator.models.Tle import Tle
 
 class Propagation(models.Model):
     created     = models.DateTimeField(auto_now_add=True)

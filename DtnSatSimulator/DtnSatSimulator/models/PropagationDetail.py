@@ -5,7 +5,7 @@ Created on Aug 29, 2016
 '''
 
 from django.db import models
-from GroundSegment.models.Propagation import Propagation
+from DtnSatSimulator.models.Propagation import Propagation
 import math
 
 class PropagationDetail(models.Model):

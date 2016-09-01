@@ -27,11 +27,21 @@ class Test(unittest.TestCase):
         print( "Val->", val )
         
     def testCreateAndSatellitePosition(self):
+        sat2 = Satellite.new("FS2017", "FS2017", 25544)
+        sat2.save()
+        
+        
+        sat3 = Satellite.new("FS2019", "FS2019", 37673)
+        sat3.save()
+
+        
+    """    
+    def testCreateAndSatellitePosition(self):
         
         #keplerian parameters: {a: 7069220.386682823; e: 4.777356060557311E-4; i: 98.18525099174988; pa: 13.741061002484528; raan: 150.34825333049; v: -13.952151446378437;}
     
     
-        """
+       
         Estacion espacial internacional
         Eccentricity:    0.0001506
         inclination:    51.6427°
@@ -42,7 +52,7 @@ class Test(unittest.TestCase):
         revolutions per day:    15.55092441
         mean anomaly at epoch:    198.0723°
         orbit number at epoch:    1536
-        """
+       
         #ephem.degrees()
         sat = Satellite()
         
@@ -57,14 +67,13 @@ class Test(unittest.TestCase):
             #sep = ephem.separation((old_az, old_alt), (sun.az, sun.alt))
             #print("%s %s %s" % (gatech.date, sun.alt, sep))
         
-        """
-        print(sat.orbit)
-        for i in range(1,10):
-            val = sat.getPosition(ephem.now())
-            print(val)
-        #print("%s %s %s" % (iss.rise_time, iss.transit_time, iss.set_time)) 2003/3/23 00:00:50 2003/3/23 00:03:26 2003/3/23 00:06:01
-        """
         
+#         print(sat.orbit)
+#         for i in range(1,10):
+#             val = sat.getPosition(ephem.now())
+#             print(val)
+#         #print("%s %s %s" % (iss.rise_time, iss.transit_time, iss.set_time)) 2003/3/23 00:00:50 2003/3/23 00:03:26 2003/3/23 00:06:01
+        """
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

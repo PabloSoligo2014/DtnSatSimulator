@@ -4,7 +4,7 @@ Created on 19 de ago. de 2016
 @author: pabli
 '''
 
-from django.db import models
+
 from datetime import *
 from requests import *
 import ephem
@@ -15,12 +15,12 @@ from DtnSatSimulator.models.Parameter import Parameter
 from django.utils.timezone import datetime, now, timedelta, utc
 from sgp4.io import twoline2rv
 from sgp4.earth_gravity import wgs72
+from django.db import models
 
+class Satellite(Node):
 
-
-class Satellite(models.Model):
-    code           = models.CharField('Codigo del satelite', max_length=24, help_text='Codigo del satelite, ejemplo FS2017', unique=True)
-    description    = models.CharField('Decripcion del satelite', max_length=100, help_text='Decripcion del satelite', unique=True)
+    #code           = models.CharField('Codigo del satelite', max_length=24, help_text='Codigo del satelite, ejemplo FS2017', unique=True)
+    #description    = models.CharField('Decripcion del satelite', max_length=100, help_text='Decripcion del satelite', unique=True)
     noradId        = models.IntegerField('Codigo norad del satelite', help_text='Codigo norad del satelite', unique=True)
     active         = models.BooleanField('Activacion/desactivacion del satelite', default=True)
     notes          = models.TextField('Observaciones sobre el satelite', max_length=512, null=True) 
