@@ -11,6 +11,7 @@ import DtnSatSimulator.Utils.Constants
     
     
 #cgs centrimetros, gramos, segundos
+#Pyorbital puede funcionar tambien    
     
 def PeriodToSemiaxis(Period):
     GM = DtnSatSimulator.Utils.Constants.G*DtnSatSimulator.Utils.Constants.Me

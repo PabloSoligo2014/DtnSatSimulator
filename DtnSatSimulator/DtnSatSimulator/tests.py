@@ -9,6 +9,7 @@ from DtnSatSimulator.Utils.MathUtils import AttitudeToPeriod
 import ephem
 from DtnSatSimulator.models.Satellite import Satellite
 from datetime import *
+from DtnSatSimulator.models import Tle
 
 class Test(unittest.TestCase):
 
@@ -21,13 +22,16 @@ class Test(unittest.TestCase):
 
 
     def testName(self):
-        
         print("Earth radious en kms", ephem.earth_radius/1000.0)
         val = AttitudeToPeriod((ephem.earth_radius/1000)+700)
         print( "Val->", val )
         
     def testCreateAndSatellitePosition(self):
         sat2 = Satellite.new("FS2017", "FS2017", 25544)
+        sat2.dtLaunch = datetime.now()
+        tle = Tle()
+        tle.satellite = sat2
+        tle.setTle(0, 0, 0, 0, 0, 0)
         sat2.save()
         
         

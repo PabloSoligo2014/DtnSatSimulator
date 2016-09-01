@@ -24,6 +24,8 @@ class Satellite(Node):
     noradId        = models.IntegerField('Codigo norad del satelite', help_text='Codigo norad del satelite', unique=True)
     active         = models.BooleanField('Activacion/desactivacion del satelite', default=True)
     notes          = models.TextField('Observaciones sobre el satelite', max_length=512, null=True) 
+    #dtLaunch       = models.IntegerField("Ano de lanzamiento, dos ultimos digitos, necesarios para crear TLE", default=17)
+    dtLaunch       = models.DateTimeField(auto_now_add=True)
     
     @classmethod
     def new(cls, code, description, noradId):
@@ -31,7 +33,6 @@ class Satellite(Node):
         result.code        = code
         result.description = description
         result.noradId     = noradId
-        
         return result
     
     def getCode(self):
